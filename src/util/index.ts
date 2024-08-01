@@ -39,3 +39,36 @@ export const extractTime = (dateTime: string) => {
 
   return `${formattedHours}:${formattedMinutes}`
 }
+
+export const formatGeorigianDate = (input: string) => {
+  const date = new Date(input)
+
+  const day = date.getDate()
+  const monthNames = [
+    'Jan',
+    'Feb',
+    'Mar',
+    'Apr',
+    'May',
+    'Jun',
+    'Jul',
+    'Aug',
+    'Sep',
+    'Oct',
+    'Nov',
+    'Dec'
+  ]
+  const month = monthNames[date.getMonth()]
+
+  return `(${day} ${month})`
+}
+
+export const formatJalaaliDate = (date: string): string => {
+  const options: Intl.DateTimeFormatOptions = {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric'
+  }
+  const jalaali = new Date(date).toLocaleDateString('fa-IR', options)
+  return jalaali
+}

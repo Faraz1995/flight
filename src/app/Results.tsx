@@ -34,7 +34,14 @@ function Results({ data }: Props) {
               />
             )
           } else {
-            return <ResultCardDesktop key={index} />
+            return (
+              <ResultCardDesktop
+                key={index}
+                item={item}
+                airports={data.additionalData.airports}
+                airlines={data.additionalData.airlines}
+              />
+            )
           }
         })}
       </>

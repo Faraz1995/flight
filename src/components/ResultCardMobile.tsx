@@ -103,7 +103,7 @@ function ResultCardMobile({ item, airports, airlines }: Props) {
       {/* end of hour box */}
       <div className='border-t border-b border-[#eeeeee] flex justify-between py-1 mt-4'>
         <div className={cn(item.isCharter && 'bg-[#f4f4f4]', 'py-1 px-3 rounded-sm')}>
-          <p className='text-sm'>چارتار</p>
+          <p className='text-sm'>چارتر</p>
         </div>
         <div>
           <p className='text-sm'>اکونومی</p>

@@ -10,7 +10,7 @@ type Props = {
   airlines: any[]
 }
 
-function ResultCard({ item, airports, airlines }: Props) {
+function ResultCardMobile({ item, airports, airlines }: Props) {
   const findCitiesBasedOnAirport = (airport: string) => {
     const item = airports.find((item) => item.iata === airport)
     if (item) {
@@ -145,4 +145,4 @@ function ResultCard({ item, airports, airlines }: Props) {
   )
 }
 
-export default ResultCard
+export default ResultCardMobile

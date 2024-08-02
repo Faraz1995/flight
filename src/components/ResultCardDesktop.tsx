@@ -89,12 +89,15 @@ function ResultCardDesktop({ item, airports, airlines }: Props) {
               <div className='border border-[#ff7913] rounded-full w-2 h-2 ml-4'></div>
             </div>
           </div>
-          <div className='relative'>
-            <p className='font-bold text-[#464646] text-2xl'>
+          <div className=''>
+            <span className='font-bold text-[#464646] text-2xl relative'>
               {extractTime(
                 item.originDestinationOptions[0].flightSegments[0].arrivalDateTime
               )}
-            </p>
+              <span className='text-[#ff1d23] text-xs absolute top-0 left-[-15px]'>
+                1+
+              </span>
+            </span>
             <p className='text-sm text-[#464646]'>
               {
                 findCitiesBasedOnAirport(
@@ -113,7 +116,6 @@ function ResultCardDesktop({ item, airports, airlines }: Props) {
                 )
               </span>
             </p>
-            <p className='text-[#ff1d23] text-xs absolute top-0 left-[-5px]'>1+</p>
           </div>
         </div>
         {/* end of hour box */}
@@ -130,7 +132,7 @@ function ResultCardDesktop({ item, airports, airlines }: Props) {
 
           <div>
             <Button onClick={clickHandler}>
-              <p>انتخاب بلیط</p>
+              <p className='text-sm'>انتخاب بلیط</p>
             </Button>
           </div>
         </div>

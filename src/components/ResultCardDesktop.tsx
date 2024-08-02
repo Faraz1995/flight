@@ -402,7 +402,7 @@ function ResultCardDesktop({ item, airports, airlines }: Props) {
                 </div>
 
                 <div className='py-3 px-2 border-l border-[#eeeeee] flex'>
-                  <p className='text-sm text-[#464646]'>2 × خردسال</p>
+                  <p className='text-sm text-[#464646]'>2 × نوزاد</p>
                   <p className=' text-sm text-[#464646] mr-2'>
                     {addThousandsSeparator(1370000)} تومان
                   </p>
@@ -411,7 +411,10 @@ function ResultCardDesktop({ item, airports, airlines }: Props) {
                 <div className='py-3 mr-2 flex'>
                   <p className='text-sm text-[#464646]'>مجموع: </p>
                   <p className='text-sm text-[#1773dc] mr-2'>
-                    {addThousandsSeparator(1370000)} تومان
+                    {addThousandsSeparator(
+                      item.airItineraryPricingInfo.itinTotalFare.totalFare
+                    )}{' '}
+                    تومان
                   </p>
                 </div>
               </div>

@@ -247,7 +247,7 @@ function Filters() {
           </div>
         </div>
       ) : (
-        <div className='flex justify-between'>
+        <div className='flex justify-between mb-4'>
           <div
             className='bg-white w-[160px] flex items-center justify-center py-3 px-10 rounded-md text-[#161616] cursor-pointer'
             onClick={toggleFilterDrawer}

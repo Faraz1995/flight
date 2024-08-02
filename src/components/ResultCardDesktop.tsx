@@ -113,7 +113,7 @@ function ResultCardDesktop({ item, airports, airlines }: Props) {
                 )
               </span>
             </p>
-            <p className='text-[#ff1d23] text-xs absolute top-0 left-0'>1+</p>
+            <p className='text-[#ff1d23] text-xs absolute top-0 left-[-5px]'>1+</p>
           </div>
         </div>
         {/* end of hour box */}

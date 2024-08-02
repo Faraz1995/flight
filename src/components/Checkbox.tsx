@@ -1,5 +1,5 @@
 // src/Checkbox.tsx
-import React, { useState } from 'react'
+import React, { ChangeEvent } from 'react'
 
 interface CheckboxProps {
   checked?: boolean
@@ -7,44 +7,21 @@ interface CheckboxProps {
   label: string
 }
 
-function Checkbox({ checked = false, onChange, label }: CheckboxProps) {
-  const [isChecked, setIsChecked] = useState(checked)
-
-  const handleChange = () => {
-    const newCheckedState = !isChecked
-    setIsChecked(newCheckedState)
-    if (onChange) onChange(newCheckedState)
+const Checkbox: React.FC<CheckboxProps> = ({ checked = false, onChange, label }) => {
+  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
+    if (onChange) onChange(event.target.checked)
   }
 
   return (
-    <div className='flex items-center space-x-2'>
+    <label className='flex items-center space-x-2 cursor-pointer'>
       <input
         type='checkbox'
-        checked={isChecked}
+        checked={checked}
         onChange={handleChange}
-        className='hidden'
-        id='custom-checkbox'
+        className='form-checkbox h-5 w-5 text-[#1773dc] border-gray-300 rounded ml-2'
       />
-      <label
-        htmlFor='custom-checkbox'
-        className={`w-6 h-6 flex items-center justify-center border rounded-sm cursor-pointer ${
-          isChecked ? 'bg-[#1773dc] border-[#1773dc]' : 'border-gray-300'
-        }`}
-      >
-        {isChecked && (
-          <svg width='16' height='12' fill='white' xmlns='http://www.w3.org/2000/svg'>
-            <path
-              d='M1 6l4 4L15 2'
-              stroke='white'
-              strokeWidth='2'
-              strokeLinecap='round'
-              strokeLinejoin='round'
-            />
-          </svg>
-        )}
-      </label>
-      <span className='text-gray-700'>{label}</span>
-    </div>
+      <span className='text-gray-700 mr-2'>{label}</span>
+    </label>
   )
 }
 

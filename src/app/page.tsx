@@ -3,7 +3,7 @@ import Results from './Results'
 import mockData from '../util/flight-data.json'
 export default function Home() {
   return (
-    <main className='flex flex-col lg:grid lg:grid-cols-12'>
+    <main className='flex flex-col lg:grid lg:grid-cols-12 mt-5'>
       <div className='col-span-2'>
         <Filters />
       </div>

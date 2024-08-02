@@ -1,11 +1,13 @@
 'use client'
+import React, { useEffect, useState } from 'react'
+import { usePathname, useSearchParams } from 'next/navigation'
+import { useRouter } from 'next/navigation'
+import Image from 'next/image'
+import { CircularProgressbar, buildStyles } from 'react-circular-progressbar'
+import 'react-circular-progressbar/dist/styles.css'
 import BottomDrawer from '@/components/BottomDrawer'
 import Checkbox from '@/components/Checkbox'
 import useWindowWidth from '@/hooks/useWidth'
-import Image from 'next/image'
-import { usePathname, useSearchParams } from 'next/navigation'
-import { useRouter } from 'next/navigation'
-import React, { useState } from 'react'
 
 interface MenuState {
   stop: boolean
@@ -25,7 +27,7 @@ interface TypeState {
   business: boolean
   [key: string]: boolean
 }
-
+const maxMinutes = 60
 const initialStopCheckbox = { no: false, one: false, more: false }
 const initialTypeCheckbox = { eco: false, business: false }
 
@@ -38,6 +40,29 @@ function Filters() {
   const [typeCheck, setTypeCheck] = useState<TypeState>(initialTypeCheckbox)
   const [filterDrawerOpen, setFilterDrawerOpen] = useState(false)
   const [sortDrawerOpen, setSortDrawerOpen] = useState(false)
+
+  const [minutes, setMinutes] = useState<number>(0)
+  const [seconds, setSeconds] = useState<number>(0)
+
+  useEffect(() => {
+    const updateMinutes = () => {
+      setMinutes((prevMinutes) => (prevMinutes + 1) % 61)
+    }
+
+    const intervalId = setInterval(updateMinutes, 60000) // 60000 ms = 1 minute
+
+    return () => clearInterval(intervalId)
+  }, [])
+
+  useEffect(() => {
+    const updateSeconds = () => {
+      setSeconds((prev) => (prev + 1) % 61)
+    }
+
+    const intervalId = setInterval(updateSeconds, 1000) // 60000 ms = 1 minute
+
+    return () => clearInterval(intervalId)
+  }, [])
 
   const windowWidth = useWindowWidth()
 
@@ -112,8 +137,29 @@ function Filters() {
 
   return (
     <>
+      {windowWidth > 1000 && (
+        <div className='flex justify-between mb-6'>
+          <p>مدت زمان اعتبار نتایج</p>
+          <div className='flex items-center'>
+            <p className='text-sm ml-2'>
+              {String(minutes).padStart(2, '0')}:{String(seconds).padStart(2, '0')}
+            </p>
+
+            <div className='w-5 h-5'>
+              <CircularProgressbar
+                strokeWidth={4}
+                maxValue={60}
+                styles={buildStyles({
+                  pathColor: '#1773dc'
+                })}
+                value={minutes}
+              />
+            </div>
+          </div>
+        </div>
+      )}
       {windowWidth > 1000 ? (
-        <div className='bg-white py-4 h-full'>
+        <div className='bg-white  h-full'>
           <div className='py-4  px-3 flex justify-between border-b border-[#eeeeee]'>
             <p className='text-sm'>فیلترها</p>
             <div onClick={removeFilters} className='cursor-pointer'>

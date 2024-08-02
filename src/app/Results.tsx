@@ -108,7 +108,7 @@ function Results({ data }: Props) {
   }
 
   return (
-    <div className='mt-5'>
+    <div>
       <div className='flex justify-between mb-6'>
         <div>
           <p className='text-xl text-[#464646] font-bold'>

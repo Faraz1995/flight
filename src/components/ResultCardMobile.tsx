@@ -72,19 +72,19 @@ function ResultCardMobile({ item, airports, airlines }: Props) {
             </span>
           </p>
         </div>
-        <div className='w-full px-4'>
-          <p className='text-center'>
+        <div className='w-full sm:px-4 flex flex-col items-center'>
+          <p className='text-center text-xs'>
             {humanizeDurationTime(
               item.originDestinationOptions[0].flightSegments[0].journeyDuration
             )}
           </p>
           <div className='w-full flex items-center mx-4'>
             <div className='border border-[#1773dc] rounded-full w-2 h-2 mr-4'></div>
-            <div className='w-11/12 flex-grow border-t-2 border-gray-300'></div>
+            <div className='w-[80px] flex-grow border-t-2 border-gray-300'></div>
             <div className='border border-[#ff7913] rounded-full w-2 h-2 ml-4'></div>
           </div>
         </div>
-        <div>
+        <div className='flex flex-col items-end'>
           <p className='font-bold text-[#464646] text-2xl'>
             {extractTime(
               item.originDestinationOptions[0].flightSegments[0].arrivalDateTime
@@ -111,7 +111,7 @@ function ResultCardMobile({ item, airports, airlines }: Props) {
         </div>
       </div>
       {/* end of hour box */}
-      <div className='border-t border-b border-[#eeeeee] flex justify-between py-1 mt-4'>
+      <div className='border-t border-b border-[#eeeeee] flex justify-between items-center py-1 mt-4'>
         <div className={cn(item.isCharter && 'bg-[#f4f4f4]', 'py-1 px-3 rounded-sm')}>
           <p className='text-sm'>چارتر</p>
         </div>

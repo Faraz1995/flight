@@ -37,6 +37,7 @@ function Filters() {
   const [stopCheck, setStopCheck] = useState<StopState>(initialStopCheckbox)
   const [typeCheck, setTypeCheck] = useState<TypeState>(initialTypeCheckbox)
   const [filterDrawerOpen, setFilterDrawerOpen] = useState(false)
+  const [sortDrawerOpen, setSortDrawerOpen] = useState(false)
 
   const windowWidth = useWindowWidth()
 
@@ -92,8 +93,21 @@ function Filters() {
   }
 
   const toggleFilterDrawer = () => {
-    console.log('toggle***********')
     setFilterDrawerOpen((prev) => !prev)
+  }
+
+  const toggleSortDrawer = () => {
+    setSortDrawerOpen((prev) => !prev)
+  }
+
+  const sortHandler = (value: string) => {
+    const params = new URLSearchParams(searchParams)
+    if (value) {
+      params.set('sort', value)
+    } else {
+      params.delete('sort')
+    }
+    replace(`${pathname}?${params.toString()}`)
   }
 
   return (
@@ -187,12 +201,22 @@ function Filters() {
           </div>
         </div>
       ) : (
-        <div
-          className='bg-white w-[160px] flex items-center justify-center py-3 px-10 rounded-md text-[#161616] cursor-pointer'
-          onClick={toggleFilterDrawer}
-        >
-          <Image src={'/assets/svg/filter.svg'} alt='filter' width={16} height={16} />
-          <p>فیلتر</p>
+        <div className='flex justify-between'>
+          <div
+            className='bg-white w-[160px] flex items-center justify-center py-3 px-10 rounded-md text-[#161616] cursor-pointer'
+            onClick={toggleFilterDrawer}
+          >
+            <Image src={'/assets/svg/filter.svg'} alt='filter' width={16} height={16} />
+            <p>فیلتر</p>
+          </div>
+
+          <div
+            className='bg-white w-[160px] flex items-center justify-center py-3 px-6 rounded-md text-[#161616] cursor-pointer'
+            onClick={toggleSortDrawer}
+          >
+            <Image src={'/assets/svg/sort.svg'} alt='filter' width={16} height={16} />
+            <p>مرتب سازی</p>
+          </div>
         </div>
       )}
       <BottomDrawer isOpen={filterDrawerOpen} onClose={toggleFilterDrawer}>
@@ -251,6 +275,18 @@ function Filters() {
               />
             </div>
           </div>
+        </div>
+      </BottomDrawer>
+
+      <BottomDrawer isOpen={sortDrawerOpen} onClose={toggleSortDrawer}>
+        <div className='flex flex-col'>
+          <p className='font-bold'>مرتب سازی بر اساس</p>
+          <p className='my-4 cursor-pointer' onClick={() => sortHandler('price')}>
+            قیمت
+          </p>
+          <p className='cursor-pointer' onClick={() => sortHandler('date')}>
+            تاریخ
+          </p>
         </div>
       </BottomDrawer>
     </>

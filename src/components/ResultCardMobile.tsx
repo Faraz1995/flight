@@ -1,8 +1,10 @@
 'use client'
 import Image from 'next/image'
-import React from 'react'
+import React, { useState } from 'react'
 import { addThousandsSeparator, cn, extractTime, humanizeDurationTime } from '@/util'
 import Button from './Button'
+import Drawer from './Drawer'
+import DetailResultMobile from './DetailResultMobile'
 
 type Props = {
   item: any
@@ -11,6 +13,8 @@ type Props = {
 }
 
 function ResultCardMobile({ item, airports, airlines }: Props) {
+  const [isDrawerOpen, setIsDrawerOpen] = useState(true)
+
   const findCitiesBasedOnAirport = (airport: string) => {
     const item = airports.find((item) => item.iata === airport)
     if (item) {
@@ -25,7 +29,13 @@ function ResultCardMobile({ item, airports, airlines }: Props) {
     }
   }
 
-  const clickHandler = () => {}
+  const clickHandler = () => {
+    setIsDrawerOpen(true)
+  }
+
+  const toggleDrawer = () => {
+    setIsDrawerOpen(!isDrawerOpen)
+  }
 
   return (
     <div className='bg-white p-4 mb-4'>
@@ -141,6 +151,14 @@ function ResultCardMobile({ item, airports, airlines }: Props) {
           </Button>
         </div>
       </div>
+      <DetailResultMobile
+        title={'جزئیات پرواز'}
+        isDrawerOpen={isDrawerOpen}
+        toggleDrawer={toggleDrawer}
+        airlines={airlines}
+        airports={airports}
+        item={item}
+      />
     </div>
   )
 }

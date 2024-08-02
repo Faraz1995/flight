@@ -304,9 +304,11 @@ function DetailResultMobile({
               <div>
                 <p className='text-sm text-[#8d8d8d]'>یک نفر</p>
                 <p className='text-[#1773dc]'>
-                  {addThousandsSeparator(
-                    item.airItineraryPricingInfo.itinTotalFare.totalFare
-                  )}{' '}
+                  <span className='font-bold text-lg'>
+                    {addThousandsSeparator(
+                      item.airItineraryPricingInfo.itinTotalFare.totalFare
+                    )}
+                  </span>{' '}
                   <span className='text-[#8d8d8d]'>تومان</span>
                 </p>
               </div>

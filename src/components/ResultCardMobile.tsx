@@ -13,7 +13,7 @@ type Props = {
 }
 
 function ResultCardMobile({ item, airports, airlines }: Props) {
-  const [isDrawerOpen, setIsDrawerOpen] = useState(true)
+  const [isDrawerOpen, setIsDrawerOpen] = useState(false)
 
   const findCitiesBasedOnAirport = (airport: string) => {
     const item = airports.find((item) => item.iata === airport)

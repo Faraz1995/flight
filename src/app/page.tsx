@@ -7,7 +7,7 @@ export default function Home() {
       <div className='col-span-2'>
         <Filters />
       </div>
-      <div className='col-span-10'>
+      <div className='col-span-10 px-4'>
         <Results data={mockData} />
       </div>
     </main>

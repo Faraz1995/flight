@@ -79,11 +79,17 @@ function Filters() {
     })
   }
 
+  const removeFilters = () => {
+    replace(`${pathname}`)
+    setStopCheck(initialStopCheckbox)
+    setTypeCheck(initialTypeCheckbox)
+  }
+
   return (
     <div className='bg-white py-4 h-full'>
       <div className='py-4  px-3 flex justify-between border-b border-[#eeeeee]'>
         <p className='text-sm'>فیلترها</p>
-        <div className='cursor-pointer'>
+        <div onClick={removeFilters} className='cursor-pointer'>
           <p className=' text-sm text-[#1773dc]'>حذف فیلترها</p>
         </div>
       </div>

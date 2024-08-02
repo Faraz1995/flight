@@ -85,7 +85,7 @@ function ResultCardDesktop({ item, airports, airlines }: Props) {
             </p>
             <div className='w-full flex items-center mx-4'>
               <div className='border border-[#1773dc] rounded-full w-2 h-2 mr-4'></div>
-              <div className='w-11/12 flex-grow border-t-2 border-gray-300'></div>
+              <div className='w-[200px] flex-1 flex-grow border-t-2 border-gray-300'></div>
               <div className='border border-[#ff7913] rounded-full w-2 h-2 ml-4'></div>
             </div>
           </div>

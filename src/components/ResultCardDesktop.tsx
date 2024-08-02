@@ -308,7 +308,16 @@ function ResultCardDesktop({ item, airports, airlines }: Props) {
                     </div>
                     <div className='flex col-start-3 col-end-3 mt-6'>
                       <p className='text-[#8d8d8d] text-xs'>استرداد</p>
-                      <p className='text-[#464646] text-xs mr-2'>سیستمی</p>
+                      <p
+                        className={cn(
+                          item.refundMethod === 'Offline' && 'text-red-700',
+                          'text-[#464646] text-xs mr-2'
+                        )}
+                      >
+                        {item.refundMethod === 'Offline'
+                          ? 'غیر قابل استرداد'
+                          : 'قابل استرداد'}
+                      </p>
                     </div>
 
                     <div className='flex col-span-1'>

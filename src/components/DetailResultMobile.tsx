@@ -218,7 +218,16 @@ function DetailResultMobile({
 
                   <div className='flex mt-2 mb-6'>
                     <p className='text-[#8d8d8d] text-xs flex-1'>استرداد</p>
-                    <p className='text-[#464646] text-xs flex-1'>سیستمی</p>
+                    <p
+                      className={cn(
+                        item.refundMethod === 'Offline' && 'text-red-700',
+                        'text-[#464646] text-xs flex-1'
+                      )}
+                    >
+                      {item.refundMethod === 'Offline'
+                        ? 'غیر قابل استرداد'
+                        : 'قابل استرداد'}
+                    </p>
                   </div>
                   {/* arrival info */}
 

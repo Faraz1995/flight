@@ -220,7 +220,7 @@ function DetailResultMobile({
                     <p className='text-[#8d8d8d] text-xs flex-1'>استرداد</p>
                     <p
                       className={cn(
-                        item.refundMethod === 'Offline' && 'text-red-700',
+                        item.refundMethod === 'Offline' && 'text-[#ff1d23]',
                         'text-[#464646] text-xs flex-1'
                       )}
                     >

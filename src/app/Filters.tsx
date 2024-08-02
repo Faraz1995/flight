@@ -1,5 +1,8 @@
 'use client'
+import BottomDrawer from '@/components/BottomDrawer'
 import Checkbox from '@/components/Checkbox'
+import useWindowWidth from '@/hooks/useWidth'
+import Image from 'next/image'
 import { usePathname, useSearchParams } from 'next/navigation'
 import { useRouter } from 'next/navigation'
 import React, { useState } from 'react'
@@ -33,6 +36,9 @@ function Filters() {
   const [isMenuOpen, setIsMenuOpen] = useState<MenuState>({ stop: false, type: false })
   const [stopCheck, setStopCheck] = useState<StopState>(initialStopCheckbox)
   const [typeCheck, setTypeCheck] = useState<TypeState>(initialTypeCheckbox)
+  const [filterDrawerOpen, setFilterDrawerOpen] = useState(false)
+
+  const windowWidth = useWindowWidth()
 
   const handleStopCheckBox = (name: string, value: boolean) => {
     const params = new URLSearchParams(searchParams)
@@ -85,94 +91,169 @@ function Filters() {
     setTypeCheck(initialTypeCheckbox)
   }
 
+  const toggleFilterDrawer = () => {
+    console.log('toggle***********')
+    setFilterDrawerOpen((prev) => !prev)
+  }
+
   return (
-    <div className='bg-white py-4 h-full'>
-      <div className='py-4  px-3 flex justify-between border-b border-[#eeeeee]'>
-        <p className='text-sm'>فیلترها</p>
-        <div onClick={removeFilters} className='cursor-pointer'>
-          <p className=' text-sm text-[#1773dc]'>حذف فیلترها</p>
-        </div>
-      </div>
-      <div className='border-b border-[#eeeeee]'>
-        <div
-          className='px-2 py-1 flex justify-between cursor-pointer '
-          onClick={() => toggleMenu('stop')}
-        >
-          <p>تعداد توقف</p>
-          <span
-            className={`transform transition-transform duration-300 ${
-              isMenuOpen['stop'] ? 'rotate-180' : 'rotate-0'
-            }`}
-          >
-            &#9660;
-          </span>
-        </div>
-        <div
-          className={`overflow-hidden transition-[max-height] duration-400 ease-in ${
-            isMenuOpen['stop'] ? 'max-h-full' : 'max-h-0'
-          }`}
-        >
-          <div className='p-2'>
-            <div className='mb-2'>
-              <Checkbox
-                checked={stopCheck['no']}
-                onChange={(value) => handleStopCheckBox('no', value)}
-                label='بدون توقف'
-              />
+    <>
+      {windowWidth > 1000 ? (
+        <div className='bg-white py-4 h-full'>
+          <div className='py-4  px-3 flex justify-between border-b border-[#eeeeee]'>
+            <p className='text-sm'>فیلترها</p>
+            <div onClick={removeFilters} className='cursor-pointer'>
+              <p className=' text-sm text-[#1773dc]'>حذف فیلترها</p>
             </div>
-            <div className='mb-2'>
-              <Checkbox
-                checked={stopCheck['one']}
-                onChange={(value) => handleStopCheckBox('one', value)}
-                label='یک توقف'
-              />
+          </div>
+          <div className='border-b border-[#eeeeee]'>
+            <div
+              className='px-2 py-1 flex justify-between cursor-pointer '
+              onClick={() => toggleMenu('stop')}
+            >
+              <p>تعداد توقف</p>
+              <span
+                className={`transform transition-transform duration-300 ${
+                  isMenuOpen['stop'] ? 'rotate-180' : 'rotate-0'
+                }`}
+              >
+                &#9660;
+              </span>
             </div>
+            <div
+              className={`overflow-hidden transition-[max-height] duration-400 ease-in ${
+                isMenuOpen['stop'] ? 'max-h-full' : 'max-h-0'
+              }`}
+            >
+              <div className='p-2'>
+                <div className='mb-2'>
+                  <Checkbox
+                    checked={stopCheck['no']}
+                    onChange={(value) => handleStopCheckBox('no', value)}
+                    label='بدون توقف'
+                  />
+                </div>
+                <div className='mb-2'>
+                  <Checkbox
+                    checked={stopCheck['one']}
+                    onChange={(value) => handleStopCheckBox('one', value)}
+                    label='یک توقف'
+                  />
+                </div>
 
-            <Checkbox
-              checked={stopCheck['more']}
-              onChange={(value) => handleStopCheckBox('more', value)}
-              label='بیش از ۲ توقف'
-            />
+                <Checkbox
+                  checked={stopCheck['more']}
+                  onChange={(value) => handleStopCheckBox('more', value)}
+                  label='بیش از ۲ توقف'
+                />
+              </div>
+            </div>
+          </div>
+
+          <div className='border-b border-[#eeeeee]'>
+            <div
+              className='px-2 py-1 flex justify-between cursor-pointer '
+              onClick={() => toggleMenu('type')}
+            >
+              <p>کلاس پرواز</p>
+              <span
+                className={`transform transition-transform duration-300 ${
+                  isMenuOpen['type'] ? 'rotate-180' : 'rotate-0'
+                }`}
+              >
+                &#9660;
+              </span>
+            </div>
+            <div
+              className={`overflow-hidden transition-[max-height] duration-400 ease-in ${
+                isMenuOpen['type'] ? 'max-h-full' : 'max-h-0'
+              }`}
+            >
+              <div className='p-2'>
+                <div className='mb-2'>
+                  <Checkbox
+                    checked={typeCheck['eco']}
+                    onChange={(value) => handleTypeCheckBox('eco', value)}
+                    label='اکونومی'
+                  />
+                </div>
+                <Checkbox
+                  checked={typeCheck['business']}
+                  onChange={(value) => handleTypeCheckBox('business', value)}
+                  label='بیزینس'
+                />
+              </div>
+            </div>
           </div>
         </div>
-      </div>
-
-      <div className='border-b border-[#eeeeee]'>
+      ) : (
         <div
-          className='px-2 py-1 flex justify-between cursor-pointer '
-          onClick={() => toggleMenu('type')}
+          className='bg-white w-[160px] flex items-center justify-center py-3 px-10 rounded-md text-[#161616] cursor-pointer'
+          onClick={toggleFilterDrawer}
         >
-          <p>کلاس پرواز</p>
-          <span
-            className={`transform transition-transform duration-300 ${
-              isMenuOpen['type'] ? 'rotate-180' : 'rotate-0'
-            }`}
-          >
-            &#9660;
-          </span>
+          <Image src={'/assets/svg/filter.svg'} alt='filter' width={16} height={16} />
+          <p>فیلتر</p>
         </div>
-        <div
-          className={`overflow-hidden transition-[max-height] duration-400 ease-in ${
-            isMenuOpen['type'] ? 'max-h-full' : 'max-h-0'
-          }`}
-        >
-          <div className='p-2'>
-            <div className='mb-2'>
+      )}
+      <BottomDrawer isOpen={filterDrawerOpen} onClose={toggleFilterDrawer}>
+        <div className='flex'>
+          <div className=' flex-1 border-l border-[#eeeeee]'>
+            <div
+              className='px-2 py-1 flex justify-between cursor-pointer '
+              onClick={() => toggleMenu('stop')}
+            >
+              <p>تعداد توقف</p>
+            </div>
+
+            <div className='p-2'>
+              <div className='mb-2'>
+                <Checkbox
+                  checked={stopCheck['no']}
+                  onChange={(value) => handleStopCheckBox('no', value)}
+                  label='بدون توقف'
+                />
+              </div>
+              <div className='mb-2'>
+                <Checkbox
+                  checked={stopCheck['one']}
+                  onChange={(value) => handleStopCheckBox('one', value)}
+                  label='یک توقف'
+                />
+              </div>
+
               <Checkbox
-                checked={typeCheck['eco']}
-                onChange={(value) => handleTypeCheckBox('eco', value)}
-                label='اکونومی'
+                checked={stopCheck['more']}
+                onChange={(value) => handleStopCheckBox('more', value)}
+                label='بیش از ۲ توقف'
               />
             </div>
-            <Checkbox
-              checked={typeCheck['business']}
-              onChange={(value) => handleTypeCheckBox('business', value)}
-              label='بیزینس'
-            />
+          </div>
+          <div className='flex-1'>
+            <div
+              className='px-2 py-1 flex justify-between cursor-pointer '
+              onClick={() => toggleMenu('type')}
+            >
+              <p>کلاس پرواز</p>
+            </div>
+
+            <div className='p-2'>
+              <div className='mb-2'>
+                <Checkbox
+                  checked={typeCheck['eco']}
+                  onChange={(value) => handleTypeCheckBox('eco', value)}
+                  label='اکونومی'
+                />
+              </div>
+              <Checkbox
+                checked={typeCheck['business']}
+                onChange={(value) => handleTypeCheckBox('business', value)}
+                label='بیزینس'
+              />
+            </div>
           </div>
         </div>
-      </div>
-    </div>
+      </BottomDrawer>
+    </>
   )
 }
 
